@@ -6,7 +6,12 @@ USE employees;
 -- 4 List all the tables in the database. Write the SQL code necessary to accomplish this.
 SHOW TABLES;
 
+SHOW TABLES FROM employees;
+
 -- 5 Explore the employees table. What different data types are present on this table?
+
+DESCRIBE employees;
+
 /*
 Date
 Enum
