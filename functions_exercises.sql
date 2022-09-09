@@ -39,7 +39,8 @@ AND birth_date LIKE '%-12-25';
 /* --#Find the smallest and largest current salary from the salaries table.*/
 
 USE employees;
-SELECT MIN(salary), MAX(salary)
+SELECT MIN(salary), 
+	MAX(salary)
 FROM salaries
 WHERE to_date > CURDATE();
 
