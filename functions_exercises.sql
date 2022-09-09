@@ -59,7 +59,8 @@ USE employees;
 SELECT 
     CONCAT(
         LOWER(left(first_name, 1)), 
-        LOWER(left(last_name, 4)), '_', 
+        LOWER(left(last_name, 4)), 
+	'_', 
         MONTH(birth_date), 
         RIGHT(year(birth_date), 2)
     ) 
