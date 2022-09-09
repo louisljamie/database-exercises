@@ -3,10 +3,11 @@
  together as a single column #named full_name.*/
 
 
-SELECT CONCAT(first_name, ' ', last_name) AS full_name
+SELECT CONCAT(first_name, ' ', last_name) 
+AS full_name
 FROM employees
 WHERE last_name 
-LIKE 'E%e';
+LIKE 'e%e';
 
 
 --#Convert the names produced in your last query to all uppercase.
@@ -16,7 +17,7 @@ UPPER(last_name))
 AS full_name
 FROM employees
 WHERE last_name 
-LIKE 'E%e';
+LIKE 'e%e';
 
 
 /*#Find all employees hired in the 90s and born on Christmas. Use datediff() 
