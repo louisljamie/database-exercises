@@ -183,7 +183,8 @@ JOIN dept_manager AS dm
 
 JOIN salaries AS s
     ON s.emp_no = e.emp_no
-WHERE dm.to_date > CURDATE() AND s.to_date > CURDATE()
+WHERE dm.to_date > CURDATE() 
+    AND s.to_date > CURDATE()
 
 
 
@@ -225,9 +226,13 @@ JOIN salaries AS s
 JOIN departments AS d
     ON d.dept_no = de.dept_no
 
-WHERE de.to_date > CURDATE() AND s.to_date > CURDATE()
+WHERE de.to_date > CURDATE() 
+    AND s.to_date > CURDATE()
 
 GROUP BY d.dept_name
+ORDER BY AVG(s.salary) DESC
+    --ROUND(AVG(s.salary), 2) DESC
+LIMIT 1
 
 
 -- Who is the highest paid employee in the Marketing department?
@@ -248,8 +253,12 @@ JOIN salaries AS s
 JOIN departments AS d
     ON d.dept_no = de.dept_no
 
-WHERE de.to_date > CURDATE() AND s.to_date > CURDATE() AND d.dept_name = 'Marketing'
+WHERE de.to_date > CURDATE() 
+    AND s.to_date > CURDATE() 
+    AND d.dept_name = 'Marketing'
 
+ORDER BY s.salary DESC
+LIMIT 1
 
 
 
@@ -298,6 +307,8 @@ JOIN departments AS d
     ON d.dept_no = de.dept_no
 
 GROUP BY d.dept_name
+ORDER BY AVG(s.salary) DESC
+
 
 
 
@@ -306,6 +317,28 @@ GROUP BY d.dept_name
 
 
 -- Bonus Who is the highest paid employee within each department. -- 
+
+USE employees;
+
+SELECT CONCAT(e.first_name, ' ', e.last_name) AS 'Employee Name', 
+    d.dept_name AS 'Department Name', 
+    s.salary AS 'Salary'
+FROM employees AS e
+
+JOIN dept_emp AS de
+    ON de.emp_no = e.emp_no
+
+JOIN salaries AS s
+    ON s.emp_no = e.emp_no
+
+JOIN departments AS d
+    ON d.dept_no = de.dept_no
+
+WHERE de.to_date > CURDATE() AND s.to_date > CURDATE()
+
+GROUP BY d.dept_name, s.salary
+ORDER BY s.salary DESC
+
 
 -- Its omportant to specify addition jpining keys to limmit multiple rows USING "AND" or "OR"
     --joing keys must be ubique and unambiguous
