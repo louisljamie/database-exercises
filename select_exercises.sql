@@ -92,7 +92,7 @@ Supernatural
 
 SELECT name, certified_sales
 FROM albums
-WHERE certified_sales < 20000000;
+WHERE certified_sales < 20;
 
 /* 
 Abbey Road
