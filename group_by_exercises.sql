@@ -28,7 +28,8 @@ WHERE last_name LIKE 'E%E';
 SELECT DISTINCT last_name
 FROM employees
 WHERE last_name LIKE '%q%'
-AND last_name NOT LIKE '%qu%';
+    AND last_name NOT LIKE '%qu%'
+ORDER BY last_name;
 
 
 -- Chleq
@@ -47,7 +48,8 @@ GROUP BY last_name;
 -- Lindqvist    190
 -- Qiwen        168
 
---7 Find all all employees with first names 'Irena', 'Vidya', or 'Maya'. Use COUNT(*) and GROUP BY to find the number of employees for each gender with those names.
+/* 7 Find all all employees with first names 'Irena', 'Vidya', or 'Maya'. Use COUNT(*) and GROUP BY 
+to find the number of employees for each gender with those names. */
 
 
 SELECT COUNT (*)
@@ -58,40 +60,49 @@ GROUP BY gender;
 
 
 
-/* 8 Using your query that generates a username for all of the employees, generate a count employees for each unique username. Are there any duplicate usernames? 
+/* 8 Using your query that generates a username for all of the employees, 
+generate a count employees for each unique username. Are there any duplicate usernames? 
 BONUS: How many duplicate usernames are there? */
 
-SELECT COUNT(*) FROM 
-    (SELECT LOWER(CONCAT(first_name, last_name)) AS username 
-    FROM employees) AS usernames 
-    GROUP BY username HAVING COUNT(*) > 1;
+USE employees;
+SELECT 
+    CONCAT(
+        LOWER(left(first_name, 1)), 
+        LOWER(left(last_name, 4)), 
+    '_', 
+        MONTH(birth_date), 
+        RIGHT(year(birth_date), 2)
+    ) AS username
+FROM employees
+GROUP BY username
+-- HAVING > 1;
 
 
 
 /*Bonus: More practice with aggregate functions:
 
-Determine the historic average salary for each employee. When you hear, read, or think "for each" with regard to SQL, you'll probably be grouping by that exact column.
+Determine the historic average salary for each employee. When you hear, read, or think 
+"for each" with regard to SQL, you'll probably be grouping by that exact column.*/
 
 
 SELECT emp_no, AVG(salary)
 FROM salaries
 GROUP BY emp_no;
 
-
-Using the dept_emp table, count how many current employees work in each department. The query result should show 9 rows, one for each department and the employee count.
+-- Using the dept_emp table, count how many current employees work in each department. The query result should show 9 rows, one for each department and the employee count.
 
 SELECT dept_no, COUNT(dept_no)
 FROM dept_emp
 WHERE to_date = '9999-01-01'
 GROUP BY dept_no;
 
-Determine how many different salaries each employee has had. This includes both historic and current.
+-- Determine how many different salaries each employee has had. This includes both historic and current.
 
 SELECT emp_no, COUNT(salary)
 FROM salaries
 GROUP BY emp_no;
 
-Find the maximum salary for each employee.
+-- Find the maximum salary for each employee.
 
 SELECT emp_no, MAX(salary)
 FROM salaries
