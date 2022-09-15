@@ -22,7 +22,7 @@ DESCRIBE departments
 ALTER TABLE quotes
 ADD UNIQUE (content);
 
--- Use the join_example_db. Select all the records from both the users and roles tables.
+-- Use the join_example_db. Select all the records from both the users and roles tables.
 
 USE join_example_db;
 
@@ -34,7 +34,7 @@ INNER JOIN
     a.role_id = b.id;
 
 
-/* Use join, left join, and right join to combine results from the users and roles tables as we did in the lesson.
+/* Use join, left join, and right join to combine results from the users and roles tables as we did in the lesson.
 Before you run each query, guess the expected number of results. */
 
 USE join_example_db;
@@ -60,7 +60,7 @@ RIGHT JOIN
 
 /* Although not explicitly covered in the lesson, aggregate functions like count can be used with join queries.
 Use count and the appropriate join type to get a list of roles along 
-with the number of users that has the role. Hint: You will also need to use group by in the query. */
+with the number of users that has the role. Hint: You will also need to use group by in the query. */
 
 SELECT roles.name AS role_name, 
     COUNT(users.name) AS user_count
@@ -81,22 +81,16 @@ RIGHT JOIN
 
 
 /* Use the employees database.
-
 write a query that shows 
 each department along with the name of the current manager for that
 department. 
-
 first check out each table needed to use
-
 manger table - manager number
 dept_manager table 
-
 employee table - employee name
 employees table
-
 department table - department name
 dept_emp table
-
 */
 
 USE employees;
@@ -338,8 +332,3 @@ WHERE de.to_date > CURDATE() AND s.to_date > CURDATE()
 
 GROUP BY d.dept_name, s.salary
 ORDER BY s.salary DESC
-
-
--- Its omportant to specify addition jpining keys to limmit multiple rows USING "AND" or "OR"
-    --joing keys must be ubique and unambiguous
-
