@@ -332,3 +332,7 @@ WHERE de.to_date > CURDATE() AND s.to_date > CURDATE()
 
 GROUP BY d.dept_name, s.salary
 ORDER BY s.salary DESC
+
+--last
+
+--
