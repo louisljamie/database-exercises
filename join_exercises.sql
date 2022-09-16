@@ -1,89 +1,8 @@
-/*
-Different Types of SQL JOINs
-Here are the different types of the JOINs in SQL:
-	•	(INNER) JOIN: Returns records that have matching values in both tables
-	•	LEFT (OUTER) JOIN: Returns all records from the left table, and the matched records from the right table
-	•	RIGHT (OUTER) JOIN: Returns all records from the right table, and the matched records from the left table
-	•	FULL (OUTER) JOIN: Returns all records when there is a match in either left or right table 
-*/
-
--- Explore the indexes in the employees database
-
-USE employees;
-SHOW INDEXES FROM employees
-
--- Explore the indexes in the employees database
-
-USE employees;
-DESCRIBE departments
-
--- Add a unique constraint to our test database, We can use the ALTER statement to update a table.
-
-ALTER TABLE quotes
-ADD UNIQUE (content);
-
--- Use the join_example_db. Select all the records from both the users and roles tables.
-
-USE join_example_db;
-
-SELECT *
-FROM users a
-INNER JOIN 
-	roles b
-	ON 
-    a.role_id = b.id;
-
-
-/* Use join, left join, and right join to combine results from the users and roles tables as we did in the lesson.
-Before you run each query, guess the expected number of results. */
-
-USE join_example_db;
-SELECT *
-FROM users a
-LEFT JOIN 
-	roles b
-	ON 
-    a.role_id = b.id;
-
-
-
----------------------------------------------------------------------
-
-USE join_example_db;
-SELECT *
-FROM users a
-RIGHT JOIN 
-	roles b
-	ON 
-    a.role_id = b.id;
-
-
-/* Although not explicitly covered in the lesson, aggregate functions like count can be used with join queries.
-Use count and the appropriate join type to get a list of roles along 
-with the number of users that has the role. Hint: You will also need to use group by in the query. */
-
-SELECT roles.name AS role_name, 
-    COUNT(users.name) AS user_count
-FROM users
-RIGHT JOIN roles
-    ON users.role_id = roles.id
-GROUP BY roles.name;
-
-
-/* 
-INNER JOIN - where there is a match in both tables.
-LEFT JOIN - 
-RIGHT JOIN 
-*/
-
-
-
 
 
 /* Use the employees database.
 write a query that shows 
-each department along with the name of the current manager for that
-department. 
+each department along with the name of the current manager for that department. 
 first check out each table needed to use
 manger table - manager number
 dept_manager table 
@@ -101,8 +20,7 @@ FROM employees AS e
 JOIN dept_manager AS dm
     ON dm.emp_no = e.emp_no ON e.emp_no = dm.emp_no
     AND to_date > CURDATE()
-JOIN departments AS -- d USING (dept_no) -- same as ON d.dept_no = dm.dept_no because they are the same column name and table, 
-                    -- so we can use USING to make it easier to read and cannot be used anywhere else
+JOIN departments AS d
     ON d.dept_no = dm.dept_no
 
 
@@ -130,8 +48,7 @@ JOIN dept_manager AS dm
     AND to_date > CURDATE()
     AND e.gender = 'F'
 
-JOIN departments AS -- d USING (dept_no) -- same as ON d.dept_no = dm.dept_no because they are the same column name and table, 
-                    -- so we can use USING to make it easier to read and cannot be used anywhere else
+JOIN departments AS d
     ON d.dept_no = dm.dept_no
 
 
@@ -225,7 +142,6 @@ WHERE de.to_date > CURDATE()
 
 GROUP BY d.dept_name
 ORDER BY AVG(s.salary) DESC
-    --ROUND(AVG(s.salary), 2) DESC
 LIMIT 1
 
 
@@ -335,4 +251,4 @@ ORDER BY s.salary DESC
 
 --last
 
---
+--1
